@@ -8,17 +8,15 @@
     },
 
     "handlers": {
-        "file_handler": {
-            "class": "logging.FileHandler",
+        "stream_handler": {
+            "class": "logging.StreamHandler",
             "level": "DEBUG",
-            "formatter": "simple",
-            "filename": "luca.log",
-            "encoding": "utf8"
+            "formatter": "simple"
         }
     },
 
     "root": {
         "level": "DEBUG",
-        "handlers": ["file_handler"]
+        "handlers": ["stream_handler"]
     }
 }

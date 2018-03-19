@@ -1,2 +1,0 @@
-2018-03-14 23:19:36,747 - core.register - INFO - {'project_name': 'test', 'project_url': 'www.test.com', 'project_env': 'dev', 'version': '0.1', 'branch': 'master', 'git_hash': '123', 'user': 'minzhang'}
-2018-03-14 23:19:46,479 - core.register - INFO - {'project_name': 'test', 'project_url': 'www.test.com', 'project_env': 'dev', 'version': '0.1', 'branch': 'master', 'git_hash': '123', 'user': 'minzhang'}

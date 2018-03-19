@@ -24,4 +24,4 @@ register = Register()
 
 # things will handle all requests to the '/things' URL path
 app.add_route('/v1/health', health_check)
-app.add_route('/v1/register', register)
+app.add_route('/v1/projects', register)
