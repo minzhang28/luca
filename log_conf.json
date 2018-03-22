@@ -10,13 +10,14 @@
     "handlers": {
         "stream_handler": {
             "class": "logging.StreamHandler",
-            "level": "DEBUG",
+            "level": "INFO",
             "formatter": "simple"
         }
     },
 
     "root": {
-        "level": "DEBUG",
-        "handlers": ["stream_handler"]
+        "level": "INFO",
+        "handlers": ["stream_handler"],
+        "formatter": "simple"
     }
 }

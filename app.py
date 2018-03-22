@@ -6,6 +6,7 @@ import json
 
 from core.health import Health
 from core.register import Register
+from falcon_cors import CORS
 
 log_file = "luca.log"
 # If applicable, delete the existing log file to generate a fresh log file during each execution
@@ -15,8 +16,12 @@ with open("log_conf.json", 'r') as logging_configuration_file:
     config_dict = json.load(logging_configuration_file)
 logging.config.dictConfig(config_dict)
 
+cors = CORS(allow_origins_regex='http://localhost:*',
+            allow_all_headers=True,
+            allow_all_methods=True)
+
 # falcon.API instances are callable WSGI apps
-app = falcon.API()
+app = falcon.API(middleware=[cors.middleware])
 
 # Resources are represented by long-lived class instances
 health_check = Health()

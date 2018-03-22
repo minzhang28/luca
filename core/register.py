@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 from util.db import DBUtil
 import falcon
 import logging
