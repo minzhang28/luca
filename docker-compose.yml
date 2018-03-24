@@ -1,0 +1,21 @@
+version: '3'
+services:
+  luca-api:
+    image: minzhang/luca-api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    ports:
+      - "5000:5000"
+  redis:
+    image: redis
+  luca-web:
+    depends_on:
+      - luca-api
+    image: minzhang/luca-web
+    ports:
+      - "38080:80"
+
