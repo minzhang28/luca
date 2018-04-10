@@ -1,4 +1,4 @@
-falcon==1.4.1
 gunicorn==19.7.1
 redis==2.10.6
-falcon-cors==1.1.7
+flask==0.12.2
+zappa==0.45.1

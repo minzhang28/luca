@@ -1,0 +1,10 @@
+{
+    "luca01d": {
+        "app_function": "app.app",
+        "aws_region": "us-east-1",
+        "profile_name": "iot-dev",
+        "project_name": "luca",
+        "runtime": "python3.6",
+        "s3_bucket": "luca01d"
+    }
+}

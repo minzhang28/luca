@@ -1,12 +1,12 @@
-
-import falcon
-from os import path, remove
-import logging.config
 import json
+import logging.config
+from os import path, remove
+from flask import Flask, request
 
-from core.health import Health
-from core.register import Register
-from falcon_cors import CORS
+from luca.core.health import health
+from luca.core.register import register_project, get_projects
+from luca.util.db import DBUtil
+import config
 
 log_file = "luca.log"
 # If applicable, delete the existing log file to generate a fresh log file during each execution
@@ -16,17 +16,25 @@ with open("log_conf.json", 'r') as logging_configuration_file:
     config_dict = json.load(logging_configuration_file)
 logging.config.dictConfig(config_dict)
 
-cors = CORS(allow_origins_regex='http://localhost:*',
-            allow_all_headers=True,
-            allow_all_methods=True)
+redis_conn = DBUtil(config.REDIS_HOST, config.REDIS_PORT).get_db_con()
 
-# falcon.API instances are callable WSGI apps
-app = falcon.API(middleware=[cors.middleware])
+app = Flask(__name__)
 
-# Resources are represented by long-lived class instances
-health_check = Health()
-register = Register()
 
-# things will handle all requests to the '/things' URL path
-app.add_route('/v1/health', health_check)
-app.add_route('/v1/projects', register)
+@app.route('/v1/projects', methods=['POST'])
+def on_post():
+    return register_project(redis_conn, request)
+
+
+@app.route('/v1/projects', methods=['GET'])
+def on_get():
+    return get_projects(redis_conn)
+
+
+@app.route('/health', methods=['GET'])
+def health_check():
+    return health();
+
+
+if __name__ == '__main__':
+    app.run()
