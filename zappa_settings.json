@@ -5,6 +5,7 @@
         "profile_name": "iot-dev",
         "project_name": "luca",
         "runtime": "python3.6",
-        "s3_bucket": "luca01d"
+        "s3_bucket": "luca01d",
+        "cors": true
     }
 }

@@ -2,3 +2,4 @@ gunicorn==19.7.1
 redis==2.10.6
 flask==0.12.2
 zappa==0.45.1
+flask-cors==3.0.3

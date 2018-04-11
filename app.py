@@ -2,7 +2,7 @@ import json
 import logging.config
 from os import path, remove
 from flask import Flask, request
-
+from flask_cors import CORS, cross_origin
 from luca.core.health import health
 from luca.core.register import register_project, get_projects
 from luca.util.db import DBUtil
@@ -19,6 +19,7 @@ logging.config.dictConfig(config_dict)
 redis_conn = DBUtil(config.REDIS_HOST, config.REDIS_PORT).get_db_con()
 
 app = Flask(__name__)
+CORS(app)
 
 
 @app.route('/v1/projects', methods=['POST'])

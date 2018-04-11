@@ -12,18 +12,16 @@ logger = logging.getLogger(__name__)
 
 
 def register_project(redis, req):
-    request_json = req.get_json();
+    request_json = req.get_json()
 
     key = "project:{}:{}".format(request_json["project_name"], request_json["project_env"])
 
     logger.info("creating record {}".format(request_json))
     try:
-        if redis.hmset(key, request_json) and redis.sadd("projects", key):
-            logger.info("successfully created record with key {}".format(key))
-            return json_response(status=201)
-        else:
-            logger.info("failed to create record")
-            return json_response(status=400)
+        redis.hmset(key, request_json)
+        redis.sadd("projects", key)
+        logger.info("successfully created record with key {}".format(key))
+        return json_response(status=201)
     except (TimeoutError, ConnectionError) as e:
         logger.error("creating record with key {} due to {}".format(key, e.msg))
         return json_response(status=500)
